@@ -1,0 +1,11 @@
+{
+  "name": "instagramhashtags",
+  "version": "1.0.0",
+  "description": "Returns instagram hashtags as per the search quesry",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Wamaitha Nyamu",
+  "license": "ISC"
+}
