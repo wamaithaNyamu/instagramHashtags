@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Instagram hashtags</title>
-    <link href="/loader.css" rel="stylesheet"  type="text/css" >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+    <link href="/css/loader.css" rel="stylesheet"  type="text/css" >
 </head>
 
 <body>
@@ -16,33 +17,23 @@
 
     </div>
     <div id="loader">
-        <p>loader</p>
-        <div class="lds-heart"><div></div></div>
+        <div class="wrapper">
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="shadow"></div>
+            <div class="shadow"></div>
+            <div class="shadow"></div>
+            <span>Loading</span>
+        </div>
+    
+    
     </div>
 
 
 <!-- ajax -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">  </script>
-<script>
-    $(document).ready(function(){
-          let hashtag;
-        $("#submit").click(function(){
-            hashtag = $("#hashtag").val();
-            $.post("/", {hashtag:hashtag},function(){
-                $('#form').each(function(){
-                    this.reset();
-
-                });
-           // $('#results').empty();
-
-            });
-            $("#results").append("All related hashtags to:" + hashtag);
-           
-           
-        });
-    });
-
-</script>
+<script src="js/ajax.js"></script>
 </body>
 
 </html>

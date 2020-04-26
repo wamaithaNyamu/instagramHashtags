@@ -2,7 +2,7 @@ let express = require('express');
 let app = express();
 let bodyParser = require("body-parser");
 let path = require('path');
-
+var reload = require('express-reload')
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public", {maxAge: 3456700000})); 
 let a = require("./index");
@@ -17,7 +17,8 @@ app.post('/', function (req,res) {
         let hashtag = req.body.hashtag;
         res.send(hashtag + 'POST REQUEST MADE');
         console.log(hashtag,'hashtag');
-        a.getHashtag(hashtag)   
+        a.getHashtag(hashtag)   ;
+
 
 });
 
