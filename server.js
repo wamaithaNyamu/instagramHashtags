@@ -22,7 +22,7 @@ app.post('/', function (req,res) {
         let hashtag = req.body.hashtag;
         res.send(hashtag + 'POST REQUEST MADE');
         console.log(hashtag,'hashtag');
-        a.goToInstagram(hashtag)   ;
+        a.main(hashtag)   ;
 
 
 });

@@ -1,5 +1,5 @@
 //BACKEND TODOS:
-show user results
+show user results 
 add button to queries they want to use
 copy all selected hashtags
 allow maximum of thirty hashtags
@@ -20,3 +20,16 @@ if hashtag not in db, launch puppeer and add to db then add to updating hashtags
 //copy hashtags they want
 //max 30 hashtags
 //copy to clipboard
+only one hashtag at a time
+remove hash #
+
+
+
+
+NOTES:
+-emulate real user
+-launch ig once?
+
+-no refreshes
+--how to scrape a site that uses ajax
+-this is not easy!
