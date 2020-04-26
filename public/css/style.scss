@@ -3,13 +3,18 @@ form{
     justify-content: center;
     align-items: center;
     align-content: center;
-    padding: 10%;
+    padding-right: 10%;
+    padding-left: 10%;
+    padding-top: 10%;
+    padding-bottom: 0%;
+
+
     input{
         font-size: 30px;
     }
    
    #hashtag{
-    height: 100px;
+    height: 80px;
     width: 600px;
 
    }
@@ -20,6 +25,16 @@ form{
         margin: 2px;
         width: 200px;
         border: none;
-        height: 100px;
+        height: 80px;
     }
+}
+#results{
+    top: 30vh;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    align-content: center;
+    padding-right: 10%;
+    padding-left: 30%;
+
 }

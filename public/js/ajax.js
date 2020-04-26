@@ -26,7 +26,7 @@ $(document).ready(function(){
         });
      
         $("#results").append("All related hashtags to:" + hashtag);
-       $("#loader").show();
+       $(".loader").css({ "display": "inline-flex" });
              return false;    //<---- Add this line
     }
   });
