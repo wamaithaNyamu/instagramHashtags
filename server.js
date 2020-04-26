@@ -1,7 +1,10 @@
 let express = require('express');
 let app = express();
 let bodyParser = require("body-parser");
+let path = require('path');
+
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(__dirname + "/public", {maxAge: 3456700000})); 
 let a = require("./index");
 
 //configuring routes
@@ -25,11 +28,4 @@ app.listen(3000, function () {
 });
 
 
-//go to instagram
-const instagram = 'https://www.instagram.com/explore/tags/shoes/'
-//search by query
-//form to enter query
-//show user results
-//add button to queries they want to use
-//copy all selected hashtags
-//allow maximum of thirty hashtags
+

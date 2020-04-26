@@ -1,18 +1,26 @@
 <!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram hashtags</title>
+    <link href="/loader.css" rel="stylesheet"  type="text/css" >
 </head>
+
 <body>
     <form action="/submit-hashtag" method="post" id="form">
   <input name="hashtag" type="text" id="hashtag" placeholder=" Instagram Hashtag to search:"/> <br />
         <input type="button" id="submit" value="Submit">    </form>
-
+        
     <div id="results">
 
     </div>
+    <div id="loader">
+        <p>loader</p>
+        <div class="lds-heart"><div></div></div>
+    </div>
+
+
 <!-- ajax -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">  </script>
 <script>
@@ -23,7 +31,10 @@
             $.post("/", {hashtag:hashtag},function(){
                 $('#form').each(function(){
                     this.reset();
-                })
+
+                });
+           // $('#results').empty();
+
             });
             $("#results").append("All related hashtags to:" + hashtag);
            
