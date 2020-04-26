@@ -1,29 +1,28 @@
 let express = require('express');
 let app = express();
-
+let bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //configuring routes
 
 //defining express routes
 app.get('/', function (req,res) {
-        res.send('HELLO!!');
+        res.sendFile('index.html', {root : __dirname});
         });
-
-app.post('/submit-data', function (req,res) {
-        res.send('POST REQUEST MADE');
+     
+app.post('/submit-hashtag', function (req,res) {
+        let hashtag = req.body.hashtag;
+        res.send(hashtag + 'POST REQUEST MADE');
+        console.log(hashtag,'hashtag');
+        getHashtag(hashtag)
+     
+     
 
 });
 
-app.put('/update-data', function (req,res) {
-        res.send('PUT REQUEST MADE');
-
-})
-
-app.delete('/delete-data', function (req,res) {
-        res.send('DELETE REQUEST MADE');
-
-})
-
+function getHashtag(x){
+        console.log("this is it hun:",x);
+}
 //server
 app.listen(3000, function () {
         console.log("Node server running");
