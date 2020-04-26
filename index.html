@@ -6,8 +6,8 @@
     <title></title>
 </head>
 <body>
-    <form action="/submit-hashtag" method="post">
-        Instagram Hashtag to search: <input name="hashtag" type="text" id="hashtag"/> <br />
+    <form action="/submit-hashtag" method="post" id="form">
+  <input name="hashtag" type="text" id="hashtag" placeholder=" Instagram Hashtag to search:"/> <br />
         <input type="button" id="submit" value="Submit">    </form>
 
     <div id="results">
@@ -17,11 +17,17 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">  </script>
 <script>
     $(document).ready(function(){
-        let hashtag;
+          let hashtag;
         $("#submit").click(function(){
             hashtag = $("#hashtag").val();
-            $.post("/", {hashtag:hashtag},);
+            $.post("/", {hashtag:hashtag},function(){
+                $('#form').each(function(){
+                    this.reset();
+                })
+            });
             $("#results").append("All related hashtags to:" + hashtag);
+           
+           
         });
     });
 
