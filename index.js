@@ -1,5 +1,11 @@
 //THIS IS THE BACKEND
 const puppeteer = require("puppeteer");
+//requite the configuration variables from the .env file.
+require("dotenv").config();
+
+let LUMUSERNAME = process.env.LUMUSERNAME;
+let LUMPASSWORD= process.env.LUMPASSWORD;
+
 //show user results
 //add button to queries they want to use
 //copy all selected hashtags
@@ -30,41 +36,36 @@ async function getBrowser(){
             headless: false,
             args: ['--no-sandbox',
                 '--disable-setuid-sandbox',
-
+                '--proxy-server=zproxy.lum-superproxy.io:22225'
             ]
         });
-
+     
         return browser
     }catch (e) {
         console.log("this error is coming from the getBroswer func", e);
     }
 }
 
-//------------------------------------------------------------------------------------------------------
-//disable js, fonts, images
-async function interceptRequests(page){
-    await page.setRequestInterception(true);
-    page.on('request', (request) => {
-        if (['stylesheet', 'font', 'script'].indexOf(request.resourceType()) !== -1) {
-            request.abort();
-        } else {
-            request.continue();
-        }
-    });
-}
 
-//GET PROXY
 
 //------------------------------------------------------------------------------
 //go to instagram
 
 async function goToInstagram(x){
+try{
     const instagram = 'https://www.instagram.com/explore/tags/'+x;
     const browser = await getBrowser();
     const page = await browser.newPage();
-   //await interceptRequests(page);
+    await page.authenticate({
+        username : LUMUSERNAME,
+        password : LUMPASSWORD
+
+    })   //await interceptRequests(page);
     await page.goto(instagram,{ timeout: 60000});
     console.log("searching the hashtag", x);
+}catch (e){
+    console.log("This error is coming from the gotToInstagram func", e);
+}
 }
 
 
