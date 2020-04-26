@@ -31,3 +31,9 @@ $(document).ready(function(){
     }
   });
 });
+
+//REMAINING FRONT END
+//order according to number of people using the hashtag
+//copy hashtags they want
+//max 30 hashtags
+//copy to clipboard
