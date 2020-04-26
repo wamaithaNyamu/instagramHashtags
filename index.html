@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <form action="/submit-hashtag" method="post">
+        Instagram Hashtag to search: <input name="hashtag" type="text" id="hashtag"/> <br />
+        <input type="button" id="submit" value="Submit">    </form>
+
+    <div id="results">
+
+    </div>
+<!-- ajax -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">  </script>
+<script>
+    $(document).ready(function(){
+        let hashtag;
+        $("#submit").click(function(){
+            hashtag = $("#hashtag").val();
+            $.post("/", {hashtag:hashtag},);
+            $("#results").append("All related hashtags to:" + hashtag);
+        });
+    });
+
+</script>
+</body>
+
+</html>

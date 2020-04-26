@@ -3,20 +3,18 @@ let app = express();
 let bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 let a = require("./index");
-//configuring routes
 
+//configuring routes
 //defining express routes
 app.get('/', function (req,res) {
         res.sendFile('index.html', {root : __dirname});
         });
      
-app.post('/submit-hashtag', function (req,res) {
+app.post('/', function (req,res) {
         let hashtag = req.body.hashtag;
         res.send(hashtag + 'POST REQUEST MADE');
         console.log(hashtag,'hashtag');
-        a.getHashtag(hashtag)
-     
-     
+        a.getHashtag(hashtag)   
 
 });
 
