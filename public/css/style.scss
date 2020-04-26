@@ -1,0 +1,25 @@
+form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    padding: 10%;
+    input{
+        font-size: 30px;
+    }
+   
+   #hashtag{
+    height: 100px;
+    width: 600px;
+
+   }
+    #submit{
+        border-color: none;
+        background-color: orange;
+        padding: 10px;
+        margin: 2px;
+        width: 200px;
+        border: none;
+        height: 100px;
+    }
+}

@@ -6,12 +6,28 @@ $(document).ready(function(){
           $('#form').each(function(){
               this.reset();
 
-          });
-     // $('#results').empty();
-
+         });
+       
       });
+   
       $("#results").append("All related hashtags to:" + hashtag);
      $("#loader").show()
      
+  });
+  $('#hashtag').keypress(function (e) {
+    if (e.which == 13) {
+        hashtag = $("#hashtag").val();
+        $.post("/", {hashtag:hashtag},function(){
+            $('#form').each(function(){
+                this.reset();
+  
+           });
+         
+        });
+     
+        $("#results").append("All related hashtags to:" + hashtag);
+       $("#loader").show();
+             return false;    //<---- Add this line
+    }
   });
 });
