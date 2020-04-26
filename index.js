@@ -1,5 +1,7 @@
 //THIS IS THE BACKEND
 const puppeteer = require("puppeteer");
+const select = require ('puppeteer-select');
+
 //requite the configuration variables from the .env file.
 require("dotenv").config();
 let LUMUSERNAME = process.env.LUMUSERNAME;
@@ -56,12 +58,12 @@ function sleep(ms) {
   }  
 
 //get hashtags
-async function getHashtags(){
+async function getHashtags(page){
     try{
        
      //   click the search bar
-     let searchBarSelector =   await page.$$eval('.eyXLr');
-     searchBarSelector.click();
+     let searchBarSelector =   await select(page).getElement('.eyXLr');
+     await searchBarSelector.click();
      //delay
      await sleep(10000);   
      //type hashtag
@@ -71,14 +73,14 @@ async function getHashtags(){
      //extract first set of hashtags
      //send to mnongo
     }catch (e){
-        console.log("Error coming from getHashtags");
+        console.log("Error coming from getHashtags",e);
     }
 }
 
 //main
 async function main(x){
-    await goToInstagram(x);
-    await getHashtags;
+    let page = await goToInstagram(x);
+    await getHashtags(page);
 }
 
 module.exports = {
