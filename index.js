@@ -1,6 +1,5 @@
 //THIS IS THE BACKEND
-//go to instagram
-const instagram = 'https://www.instagram.com/explore/tags/'
+const puppeteer = require("puppeteer");
 //show user results
 //add button to queries they want to use
 //copy all selected hashtags
@@ -16,13 +15,56 @@ const instagram = 'https://www.instagram.com/explore/tags/'
 //serve clients from the db instead
 //use ajax to serve results
 //if hashtag not in db, launch puppeer and add to db then add to updating hashtags daily
-//
 
 
 
-function getHashtag(x){
-    console.log("this is it hun from another file :",x);
-    console.log(instagram+x);
+
+//--------------------------------------------------------------------------------
+//get browser
+
+//initiate browser, open new page and go to url then return page
+async function getBrowser(){
+    try{
+        console.log("in get page");
+        const browser = await puppeteer.launch({
+            headless: false,
+            args: ['--no-sandbox',
+                '--disable-setuid-sandbox',
+
+            ]
+        });
+
+        return browser
+    }catch (e) {
+        console.log("this error is coming from the getBroswer func", e);
+    }
+}
+
+//------------------------------------------------------------------------------------------------------
+//disable js, fonts, images
+async function interceptRequests(page){
+    await page.setRequestInterception(true);
+    page.on('request', (request) => {
+        if (['stylesheet', 'font', 'script'].indexOf(request.resourceType()) !== -1) {
+            request.abort();
+        } else {
+            request.continue();
+        }
+    });
+}
+
+//GET PROXY
+
+//------------------------------------------------------------------------------
+//go to instagram
+
+async function goToInstagram(x){
+    const instagram = 'https://www.instagram.com/explore/tags/'+x;
+    const browser = await getBrowser();
+    const page = await browser.newPage();
+   //await interceptRequests(page);
+    await page.goto(instagram,{ timeout: 60000});
+    console.log("searching the hashtag", x);
 }
 
 
@@ -30,8 +72,6 @@ function getHashtag(x){
 
 
 
-
-
 module.exports = {
-    getHashtag
+    goToInstagram
 }
