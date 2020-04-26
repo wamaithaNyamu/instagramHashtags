@@ -58,7 +58,7 @@ function sleep(ms) {
   }  
 
 //get hashtags
-async function getHashtags(page){
+async function getHashtags(page,x){
     try{
        
      //   click the search bar
@@ -67,6 +67,7 @@ async function getHashtags(page){
      //delay
      await sleep(10000);   
      //type hashtag
+     await page.$eval('.XTCLo', el => el.value = '#'+x);
 //     await driver.findElement(By.css(".XTCLo")).sendKeys("#shoes")
 
      //delay
@@ -79,8 +80,10 @@ async function getHashtags(page){
 
 //main
 async function main(x){
-    let page = await goToInstagram(x);
-    await getHashtags(page);
+    let input = x;
+    console.log("the input:", input);
+    let page = await goToInstagram(input);
+    await getHashtags(page,input);
 }
 
 module.exports = {
