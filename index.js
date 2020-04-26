@@ -2,26 +2,8 @@
 const puppeteer = require("puppeteer");
 //requite the configuration variables from the .env file.
 require("dotenv").config();
-
 let LUMUSERNAME = process.env.LUMUSERNAME;
 let LUMPASSWORD= process.env.LUMPASSWORD;
-
-//show user results
-//add button to queries they want to use
-//copy all selected hashtags
-//allow maximum of thirty hashtags
-//launch puppeteer browser
-//get all links on first url
-//store in array
-//only add # if not in array
-//launch threads for the next gen
-//repeat until we no longer have any more #
-//add hashtags to db
-//cron job to update hashtags daily
-//serve clients from the db instead
-//use ajax to serve results
-//if hashtag not in db, launch puppeer and add to db then add to updating hashtags daily
-
 
 
 
