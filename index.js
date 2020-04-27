@@ -157,7 +157,8 @@ async function checkIfHashtagExists(hashtag,res){
 async function storeToMongo(hashtag){
     try{
         
-    await createPost(hashtag, 'dummy', 'dummy');
+    let b = await createPost(hashtag, 'dummy', 'dummy');
+    console.log('stored cont',b);
     console.log("stored!");
     }catch (e){
         console.log("This error is coming from the storeToMongo func", e);
@@ -176,8 +177,10 @@ async function mongoEverything(){
      
     app.post('/', function(req, res){
         console.log(req.body.hashtag);
+        console.log(req.body);
         checkIfHashtagExists(req.body.hashtag, res);
- 
+        //res.sendFile('index.html', {root : __dirname});
+
     });
 }catch (e){
     console.log("This error is coming from the mongoEverything func", e);
@@ -201,7 +204,7 @@ function sleep(ms) {
 //main
 
 //server
-app.listen(3000, function () {
+app.listen(8000, function () {
     console.log("Node server running");
 });
 
