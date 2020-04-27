@@ -79,6 +79,8 @@ try{
 const hashtagSchema = new mongoose.Schema({
       hashtag: {
           type: String,
+          unique : true,
+         
 
       },
 
@@ -113,6 +115,7 @@ async function connectMongo(){
         useNewUrlParser: true,
         useUnifiedTopology: true
     });
+    mongoose.set('useCreateIndex', true)
     console.log('connected to mongodb!');
     return connector;
 }catch (e){
@@ -122,22 +125,45 @@ async function connectMongo(){
 }
 
 //check if hashtag is in mongo
-async function checkIfHashtagExists(hashtag){
+async function checkIfHashtagExists(hashtag,res){
     console.log('Checking if'+ hashtag +'is in db' );
-    let result = POST.findOne({hashtag});
+    // let result = await  POST.findOne({hashtag:hashtag});
+    // console.log(result);
+    POST.exists({hashtag: hashtag}, function(err, result){
+        if(err){
+            let b =res.send(err);
+            console.log(result,'b');
 
-    if(result === true){
-        console.log('hashtag in db');
-    }else{
-        console.log('we gon need puppeteer ');
+        }else {
+        
+            let a = res.send(result)
+            console.log(result,'a')
+            if(result==true){
+                console.log('true in the db')
+            }else{
+                console.log('false not in the db');
+                storeToMongo(hashtag);
+ 
+            }
+           ;
+        }
+    })
 
-    }
    
 
 
 }
+//store to mongo if not in mongo
+async function storeToMongo(hashtag){
+    try{
+        
+    await createPost(hashtag, 'dummy', 'dummy');
+    console.log("stored!");
+    }catch (e){
+        console.log("This error is coming from the storeToMongo func", e);
 
-//mongo
+    }
+}
 
 async function mongoEverything(){
     try{
@@ -150,11 +176,11 @@ async function mongoEverything(){
      
     app.post('/', function(req, res){
         console.log(req.body.hashtag);
-        checkIfHashtagExists(req.body.hashtag);
+        checkIfHashtagExists(req.body.hashtag, res);
  
     });
 }catch (e){
-    console.log("This error is coming from the gotToInstagram func", e);
+    console.log("This error is coming from the mongoEverything func", e);
 
 }
   
