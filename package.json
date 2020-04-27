@@ -2,10 +2,12 @@
   "name": "instagramhashtags",
   "version": "1.0.0",
   "description": "Returns instagram hashtags as per the search quesry",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+
   "engines": {
     "node": ">= 12.13.1",
     "npm": ">= 6.12.1"
@@ -16,10 +18,12 @@
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "mongoose": "^5.9.10",
     "puppeteer": "^2.1.1",
     "puppeteer-select": "^1.0.3"
   },
   "devDependencies": {
-    "express-reload": "^1.2.0"
+    "express-reload": "^1.2.0",
+    "nodemon": "^2.0.3"
   }
 }

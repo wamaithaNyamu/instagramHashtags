@@ -1,11 +1,20 @@
 //THIS IS THE BACKEND
 const puppeteer = require("puppeteer");
 const select = require ('puppeteer-select');
+const mongoose  = require('mongoose');
+
+//express and body parser
+let express = require('express');
+let app = express();
+let bodyParser = require("body-parser");
 
 //requite the configuration variables from the .env file.
+app.use(express.static(__dirname + "/public", {maxAge: 3456700000})); 
+if (app.settings.env === 'development') process.env.NODE_ENV = 'development';
 require("dotenv").config();
 let LUMUSERNAME = process.env.LUMUSERNAME;
 let LUMPASSWORD= process.env.LUMPASSWORD;
+
 //--------------------------------------------------------------------------------
 //get browser
 
@@ -63,6 +72,95 @@ try{
 
 }
 }
+
+//MONGOOSE
+//----------------------------------------------------------------------------------------------
+//SCHEMA
+const hashtagSchema = new mongoose.Schema({
+      hashtag: {
+          type: String,
+
+      },
+
+      followers: {
+        type:String,
+      },
+
+      relatedHashtags:{
+          type: String,
+      }
+});
+
+//mongoose model
+const POST = mongoose.model('instagramhashtags', hashtagSchema, 'instagramhashtags');
+let MONGOURI = process.env.MONGOURI;
+
+//create  new hashtags in db
+async function createPost(hashtag, followers,relatedHashtags){
+
+    return new POST({
+        hashtag,
+        followers,
+        relatedHashtags
+    }).save();
+
+}
+
+//connect to mongo
+async function connectMongo(){
+    try{
+    const connector = mongoose.connect(MONGOURI,{
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    });
+    console.log('connected to mongodb!');
+    return connector;
+}catch (e){
+    console.log("This error is coming from the connrt mongo func", e);
+
+}
+}
+
+//check if hashtag is in mongo
+async function checkIfHashtagExists(hashtag){
+    console.log('Checking if'+ hashtag +'is in db' );
+    let result = POST.findOne({hashtag});
+
+    if(result === true){
+        console.log('hashtag in db');
+    }else{
+        console.log('we gon need puppeteer ');
+
+    }
+   
+
+
+}
+
+//mongo
+
+async function mongoEverything(){
+    try{
+    await connectMongo();
+    app.use(bodyParser.urlencoded({ extended: true }));
+
+    app.get('/', function (req,res) {
+        res.sendFile('index.html', {root : __dirname});
+        });
+     
+    app.post('/', function(req, res){
+        console.log(req.body.hashtag);
+        checkIfHashtagExists(req.body.hashtag);
+ 
+    });
+}catch (e){
+    console.log("This error is coming from the gotToInstagram func", e);
+
+}
+  
+
+}
+mongoEverything();
 //----------------------------------------------------------------------------------------------
 //sleep function
 function sleep(ms) {
@@ -71,12 +169,13 @@ function sleep(ms) {
     });
   }  
 
+
+ 
 //----------------------------------------------------------------------------------------------
 //main
-async function main(input){
-     await goToInstagram(input);
-}
 
-module.exports = {
-    main
-}
+//server
+app.listen(3000, function () {
+    console.log("Node server running");
+});
+
