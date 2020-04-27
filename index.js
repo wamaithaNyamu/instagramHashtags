@@ -41,15 +41,29 @@ try{
         username : LUMUSERNAME,
         password : LUMPASSWORD
 
-    })   //await interceptRequests(page);
+    })
+    
+    //open explore tags
     await page.goto(instagram,{ timeout: 60000});
     console.log("searching the hashtag", x);
-    return page;
-}catch (e){
-    console.log("This error is coming from the gotToInstagram func", e);
-}
-}
 
+    //click search bar
+    let searchBarSelector =   await select(page).getElement('.eyXLr');
+    await searchBarSelector.click();
+
+    //delay
+    await sleep(10000);   
+
+    //type hashtag
+    await page.$eval('.XTCLo', el => el.value = '#'+x);
+
+
+}catch (e){
+        console.log("This error is coming from the gotToInstagram func", e);
+
+}
+}
+//----------------------------------------------------------------------------------------------
 //sleep function
 function sleep(ms) {
     return new Promise((resolve) => {
@@ -57,33 +71,10 @@ function sleep(ms) {
     });
   }  
 
-//get hashtags
-async function getHashtags(page,x){
-    try{
-       
-     //   click the search bar
-     let searchBarSelector =   await select(page).getElement('.eyXLr');
-     await searchBarSelector.click();
-     //delay
-     await sleep(10000);   
-     //type hashtag
-     await page.$eval('.XTCLo', el => el.value = '#'+x);
-//     await driver.findElement(By.css(".XTCLo")).sendKeys("#shoes")
-
-     //delay
-     //extract first set of hashtags
-     //send to mnongo
-    }catch (e){
-        console.log("Error coming from getHashtags",e);
-    }
-}
-
+//----------------------------------------------------------------------------------------------
 //main
-async function main(x){
-    let input = x;
-    console.log("the input:", input);
-    let page = await goToInstagram(input);
-    await getHashtags(page,input);
+async function main(input){
+     await goToInstagram(input);
 }
 
 module.exports = {

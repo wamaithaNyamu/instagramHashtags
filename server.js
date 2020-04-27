@@ -3,29 +3,31 @@ let express = require('express');
 let app = express();
 let bodyParser = require("body-parser");
 let path = require('path');
-var reload = require('express-reload')
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + "/public", {maxAge: 3456700000})); 
 let a = require("./index");
 if (app.settings.env === 'development') process.env.NODE_ENV = 'development';
 require("dotenv").config();
+let hashtagArr = [];
 
-let LUMUSERNAME = process.env.LUMUSERNAME;
-let LUMPASSWORD= process.env.LUMPASSWORD;
+function appendHash(req,res,next){
+        let hashtag = req.body.hashtag;
+        hashtagArr.push(hashtag);
+        next();
+}
+function myCallback(req,res,next){
+        console.log('in the callbak',hashtagArr);
+        a.main(hashtagArr[0]);
+        res.end();
+}
 //configuring routes
 //defining express routes
 app.get('/', function (req,res) {
         res.sendFile('index.html', {root : __dirname});
         });
      
-app.post('/', function (req,res) {
-        let hashtag = req.body.hashtag;
-        // res.send(hashtag + 'POST REQUEST MADE');
-        console.log(hashtag,'hashtag');
-        // a.main(hashtag)   ;
+app.post('/', appendHash,myCallback);
 
-
-});
 
 
 //server
