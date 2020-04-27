@@ -2,6 +2,7 @@
 const puppeteer = require("puppeteer");
 const select = require ('puppeteer-select');
 const mongoose  = require('mongoose');
+var path = require('path');
 
 //express and body parser
 let express = require('express');
@@ -174,8 +175,13 @@ async function mongoEverything(){
     app.use(bodyParser.urlencoded({ extended: true }));
 
     app.get('/', function (req,res) {
-        
-        res.render('index', {root : __dirname});
+        POST.find({},function(err,data){
+            res.render('index.ejs', {
+                user: req.user,
+                hashtagData : data
+            });
+        });
+        //  res.render('index', {root : __dirname});
         });
      
     app.post('/', function(req, res){

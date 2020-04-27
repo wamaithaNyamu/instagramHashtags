@@ -16,10 +16,7 @@
         <input type="button" id="submit" value="Submit"/>  <br/>
         
       </form>
-      <span id="results"></span>
-    <span id="results">
-
-    </span>
+     
     <div class="loader">
         <div class="wrapper">
             <div class="circle"></div>
@@ -33,7 +30,15 @@
     
     
     </div>
+<div id="results">
+<% hashtagData.forEach(function(instagramhashtags){%>
+    <%= instagramhashtags.hashtag %></br>
+    <%= instagramhashtags.followers %></br>
+    <%= instagramhashtags.relatedHashtags%>
 
+    <%})%>
+</br>
+</div>
 
 <!-- ajax -->
 <script src="js/ajaxjquery.js">  </script>
