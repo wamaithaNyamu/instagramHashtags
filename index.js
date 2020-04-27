@@ -141,7 +141,8 @@ async function checkIfHashtagExists(hashtag,res){
         
             let a = res.send(result)
             console.log(result,'a')
-            if(result==true){
+            if(result===true){
+
                 console.log('true in the db')
             }else{
                 console.log('false not in the db');

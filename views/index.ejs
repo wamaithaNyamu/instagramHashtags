@@ -16,25 +16,18 @@
         <input type="button" id="submit" value="Submit"/>  <br/>
         
       </form>
-     
-    <div class="loader">
+    <div class =loader>
         <div class="wrapper">
-            <div class="circle"></div>
-            <div class="circle"></div>
-            <div class="circle"></div>
-            <div class="shadow"></div>
-            <div class="shadow"></div>
-            <div class="shadow"></div>
-            <span>Loading</span>
+            LOADING...
+            <div  class="lds-heart"><div></div></div>    
         </div>
-    
-    
     </div>
-<div id="results">
+<div id="results"></div>
+<div id="everythingInDb">
 <% hashtagData.forEach(function(instagramhashtags){%>
     <%= instagramhashtags.hashtag %></br>
     <%= instagramhashtags.followers %></br>
-    <%= instagramhashtags.relatedHashtags%>
+    <%= instagramhashtags.relatedHashtags%></br>
 
     <%})%>
 </br>
