@@ -7,6 +7,8 @@ const mongoose  = require('mongoose');
 let express = require('express');
 let app = express();
 let bodyParser = require("body-parser");
+app.set('view engine', 'ejs')
+app.set('views', './views');
 
 //requite the configuration variables from the .env file.
 app.use(express.static(__dirname + "/public", {maxAge: 3456700000})); 
@@ -172,14 +174,14 @@ async function mongoEverything(){
     app.use(bodyParser.urlencoded({ extended: true }));
 
     app.get('/', function (req,res) {
-        res.sendFile('index.html', {root : __dirname});
+        
+        res.render('index', {root : __dirname});
         });
      
     app.post('/', function(req, res){
         console.log(req.body.hashtag);
         console.log(req.body);
         checkIfHashtagExists(req.body.hashtag, res);
-        //res.sendFile('index.html', {root : __dirname});
 
     });
 }catch (e){

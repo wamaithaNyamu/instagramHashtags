@@ -1,10 +1,12 @@
 $(document).ready(function(){
     let hashtag;
   $("#submit").click(function(){
+ 
       hashtag = $("#hashtag").val();
       $.post("/", {hashtag:hashtag},function(){
           $('#form').each(function(){
               this.reset();
+                 $("#results").reset();
 
          });
        
@@ -30,6 +32,10 @@ $(document).ready(function(){
              return false;    //<---- Add this line
     }
   });
+
+
+  //get
+  $.get('/', )
 });
 
 //REMAINING FRONT END
