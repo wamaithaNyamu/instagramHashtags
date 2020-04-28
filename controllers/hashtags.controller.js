@@ -32,7 +32,10 @@ exports.create = (req,res) => {
 exports.findAll = (req,res) =>{
     Hashtags.find().then(
         allHashtags => {
-            res.send(allHashtags);
+            res.render('index.ejs', {
+                user: req.user,
+                hashtagData : allHashtags
+            });
         
     }).catch(err =>{
         res.status(500).send({
@@ -44,14 +47,18 @@ exports.findAll = (req,res) =>{
 
 //retrieve on hashtag
 exports.findOne = (req,res)=>{
-    Hashtags.findById(req.params.hashtagId).then(
+    Hashtags.findOne({hashtag: req.params.hashtag}).then(
         oneHashtag => {
             if(!oneHashtag){
                 return res.status(404).send({
                     message : "Apologies, we do'nt have this hashtag yet. Check in later. We are working on it ASAP!"
                 })
             }
-            res.send(oneHashtag);
+            // res.send(oneHashtag);
+            res.render('index.ejs', {
+                user: req.user,
+                oneSearch : oneHashtag
+            });
 
         }
     ).catch(err=> {
@@ -109,7 +116,7 @@ exports.delete = (req, res) => {
                 message: "Note not found with id " + req.params.hashtagId
             });
         }
-        res.send({message: "hashtag deleted successfully!"});
+        res.send({message: "hash deleted successfully!"});
     }).catch(err => {
         if(err.kind === 'ObjectId' || err.name === 'NotFound') {
             return res.status(404).send({

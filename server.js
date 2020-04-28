@@ -9,7 +9,12 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 // parse application/json
 app.use(bodyParser.json())
+app.set('view engine', 'ejs')
+app.set('views', './views');
+if (app.settings.env === 'development') process.env.NODE_ENV = 'development';
 
+//requite the configuration variables from the .env file.
+app.use(express.static(__dirname + "/public", {maxAge: 3456700000})); 
 // Configuring the database
 const dbConfig = require('./config/database.config.js');
 const mongoose = require('mongoose');
@@ -29,11 +34,6 @@ mongoose.connect(dbConfig.url, {
 });
 
 
-
-//define route
-app.get('/',(req,res) => {
-    res.json({"message": 'heey'});
-});
 
 require('./routes/hashtags.routes.js')(app);
 // listen for requests
