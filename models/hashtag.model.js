@@ -15,7 +15,7 @@ const hashtagSchema = new mongoose.Schema({
     relatedHashtags:{
         type: String,
     },
-        timestamps:true
+       
    
   
 });
