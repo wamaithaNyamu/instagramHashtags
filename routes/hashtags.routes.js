@@ -16,6 +16,6 @@ module.exports = (app) =>{
     app.put('/hashtags/:hashtagId', hashtags.update);
 
     //delete a hashtag
-    app.delete('/hahstags/hashtagId', hashtags.delete);
+    app.delete('/hashtags/:hashtagId', hashtags.delete);
     
 }

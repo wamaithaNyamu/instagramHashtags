@@ -70,7 +70,7 @@ exports.findOne = (req,res)=>{
 //update hashtag 
 exports.update = (req,res)=>{
 //validate request
-    if(!req.body.content){
+    if(!req.body.hashtag){
         return res.status(400).send({
             message: "The hashtag is empty "
         });
@@ -87,11 +87,11 @@ exports.update = (req,res)=>{
                message : "I knoweth not what thee searches"
            });
        }
-       res.send(hashtagId);
+       res.send(hashtag);
    }) .catch(err => {
     if(err.kind === 'ObjectId') {
         return res.status(404).send({
-            message: "Note not found with id " + req.params.hashtagId
+            message: "Nothing  found with id " + req.params.hashtagId
         });                
     }
     return res.status(500).send({
@@ -109,7 +109,7 @@ exports.delete = (req, res) => {
                 message: "Note not found with id " + req.params.hashtagId
             });
         }
-        res.send({message: "Note deleted successfully!"});
+        res.send({message: "hashtag deleted successfully!"});
     }).catch(err => {
         if(err.kind === 'ObjectId' || err.name === 'NotFound') {
             return res.status(404).send({
