@@ -8,6 +8,8 @@
     <link href="/css/loader.css" rel="stylesheet"  type="text/css" >
     <link href="/css/style.css" rel="stylesheet"  type="text/css" >
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/clipboard.js/1.5.12/clipboard.min.js"></script>
+
     <script src="/js/ajax.js"></script>
 
 </head>
@@ -32,6 +34,7 @@
 <div id="everythingInDb">
     <div class="wrapperEverything">
 
+        
 <% hashtagData.forEach(function(instagramhashtags){%>
     <div class="innerEverything">
         <span class="theHashtag">#<%= instagramhashtags.hashtag %>    </span>
@@ -42,11 +45,15 @@
         Related hashtags: <br/>
     </br>
         <div class="relWrapper">
-            <div id="copyText" class="relatedHashtags"><%- instagramhashtags.relatedHashtags%></br>
-            </div>
+            <fieldset >
+                <legend>Click to copy to clipboard</legend>
+              <div class="relatedHashtags" data-clipboard-target="#copyText" id="copyText">
+                <%= instagramhashtags.relatedHashtags%></br>
+              </div> 
+            </fieldset>
        
         </div>
-        <button onclick="copyToClipboard(btn)" id="copy"class="copy" class="btnCopy">COPY TO CLIPBOARD</button>
+        <!-- <button  id="copy"class="copy" class="btnCopy">COPY TO CLIPBOARD</button> -->
 
     
     </div>

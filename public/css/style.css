@@ -74,12 +74,6 @@ form #submit {
   background-color: orange;
 }
 
-.relWrapper {
-  border: 1px solid #eaeaea;
-  border-radius: 10px;
-  transition: color 0.15s ease, border-color 0.15s ease;
-}
-
 .relatedHashtags {
   font-size: 30px;
   margin: 1rem;
@@ -98,6 +92,12 @@ hr {
   text-align: center;
   cursor: pointer;
   transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+legend {
+  font-size: 16px;
+  color: grey;
+  text-align: center;
 }
 
 /*# sourceMappingURL=style.css.map */

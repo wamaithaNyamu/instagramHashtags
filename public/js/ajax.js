@@ -34,7 +34,9 @@ $(document).ready(function(){
   });
 });
 
-
+$(function(){
+var clipboard = new Clipboard('.relatedHashtags');
+});
 
 // function getCopied(){
 //   var copyText = document.getElementsByClassName("copyText").textContent;
