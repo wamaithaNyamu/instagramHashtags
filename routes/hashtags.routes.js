@@ -1,0 +1,21 @@
+module.exports = (app) =>{
+    const hashtags = require('../controllers/hashtags.controller.js');
+
+
+    //new hashtag
+    app.post('/hashtags', hashtags.create);
+
+
+    //get all hashtags
+    app.get('/hashtags', hashtags.findAll);
+
+    //get on hashtag
+    app.get('/hashtags/:hashtagId', hashtags.findOne);
+
+    //update a hashtag
+    app.put('/hashtags/:hashtagId', hashtags.update);
+
+    //delete a hashtag
+    app.delete('/hahstags/hashtagId', hashtags.delete);
+    
+}

@@ -97,6 +97,8 @@ const hashtagSchema = new mongoose.Schema({
 
 //mongoose model
 const POST = mongoose.model('instagramhashtags', hashtagSchema, 'instagramhashtags');
+
+
 let MONGOURI = process.env.MONGOURI;
 
 //create  new hashtags in db
@@ -183,6 +185,10 @@ async function mongoEverything(){
         });
         //  res.render('index', {root : __dirname});
         });
+
+        app.get('/search',  function(req,res){
+            POST.find({hashtag:req.body.hashtag }, function(err,))
+        })
      
     app.post('/', function(req, res){
         console.log('Post a hashtag: ' + JSON.stringify(req.body));
