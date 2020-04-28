@@ -2,32 +2,34 @@ $(document).ready(function(){
     let hashtag;
   $("#submit").click(function(){
     console.log("retirieving results")
-      hashtag = $("#hashtag").val();
-      $.post("/", {hashtag:hashtag},function(){
-          $('#form').each(function(){
-              this.reset();
+     let  hashtag = $("#hashtag").val();
+      let query = "/hashtags/:" + hashtag;
+    console.log("this is the hashtag value", hashtag)
+      // $.get(query,function(){
+      //     $('#form').each(function(){
+      //         this.reset();
 
-         });
+      //    });
        
-      });
+      // });
    
-      $(".loader").css({ "display": "inline-flex" });
-      $("#everythingInDb").css({ "display": "none" });
+      // $(".loader").css({ "display": "inline-flex" });
+      // $("#everythingInDb").css({ "display": "none" });
      
   });
   $('#hashtag').keypress(function (e) {
     if (e.which == 13) {
         hashtag = $("#hashtag").val();
-        $.post("/", {hashtag:hashtag},function(){
-            $('#form').each(function(){
+        $.get("/hashtags/:"+hashtag,function(){
+          $('#form').each(function(){
                 this.reset();
   
            });
          
         });
      
-       $(".loader").css({ "display": "inline-flex" });
-       $("#everythingInDb").css({ "display": "none" });
+      //  $(".loader").css({ "display": "inline-flex" });
+      //  $("#everythingInDb").css({ "display": "none" });
 
              return false;    //<---- Add this line
     }
