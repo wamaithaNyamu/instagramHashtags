@@ -7,14 +7,16 @@
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css"> -->
     <link href="/css/loader.css" rel="stylesheet"  type="text/css" >
     <link href="/css/style.css" rel="stylesheet"  type="text/css" >
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/js/ajax.js"></script>
 
 </head>
 
 <body>
     <form action="/" method="post" id="form">
-  <input name="hashtag" type="text" id="hashtag" placeholder=" search #hashtag:"/> <br />
-        <input type="button" id="submit" value="Submit"/>  <br/>
-        
+    <input name="hashtag" type="text" id="hashtag" placeholder=" search #hashtag:"/> <br />
+    <button id="submit" type="submit" class="btn btn-default">Submit</button>
+
       </form>
     <div class =loader>
         <div class="wrapper">
@@ -22,20 +24,70 @@
             <div  class="lds-heart"><div></div></div>    
         </div>
     </div>
+    <div id="searched">
+
+    </div>
 <div id="results"></div>
+
 <div id="everythingInDb">
+    <div class="wrapperEverything">
+
 <% hashtagData.forEach(function(instagramhashtags){%>
-    <%= instagramhashtags.hashtag %></br>
-    <%= instagramhashtags.followers %></br>
-    <%= instagramhashtags.relatedHashtags%></br>
+    <div class="innerEverything">
+        <span class="theHashtag">#<%= instagramhashtags.hashtag %>    </span>
+        <span class="followers"> Followers  <%= instagramhashtags.followers %></br>
+        </span>
+    </br>
+
+        Related hashtags: <br/>
+    </br>
+        <div class="relWrapper">
+            <div id="copyText" class="relatedHashtags"><%- instagramhashtags.relatedHashtags%></br>
+            </div>
+       
+        </div>
+        <button onclick="copyToClipboard(btn)" id="copy"class="copy" class="btnCopy">COPY TO CLIPBOARD</button>
+
+    
+    </div>
+    
+    
 
     <%})%>
 </br>
 </div>
+</div>
+
 
 <!-- ajax -->
-<script src="js/ajaxjquery.js">  </script>
-<script src="js/ajax.js"></script>
+<script>
+    var btn = document.getElementById('copyText').textContent; 
+function copyToClipboard(str) {
+  // let str = document.getElementsByClassName("copyText").innerText;
+console.log("the value:", str);
+
+  const el = document.createElement('textarea');  // Create a <textarea> element
+  el.value = str;                                 // Set its value to the string that you want copied
+  el.setAttribute('readonly', '');                // Make it readonly to be tamper-proof
+  el.style.position = 'absolute';                 
+  el.style.left = '-9999px';                      // Move outside the screen to make it invisible
+  document.body.appendChild(el);                  // Append the <textarea> element to the HTML document
+  const selected =            
+    document.getSelection().rangeCount > 0        // Check if there is any content selected previously
+      ? document.getSelection().getRangeAt(0)     // Store selection if found
+      : false;                                    // Mark as false to know no selection existed before
+  el.select();                                    // Select the <textarea> content
+  document.execCommand('copy');                   // Copy - only works as a result of a user action (e.g. click events)
+  document.body.removeChild(el);                  // Remove the <textarea> element
+  if (selected) {                                 // If a selection existed before copying
+    document.getSelection().removeAllRanges();    // Unselect everything on the HTML document
+    document.getSelection().addRange(selected);   // Restore the original selection
+  }
+};
+
+
+</script>
+<!-- <script src="js/ajaxjquery.js">  </script> -->
 </body>
 
 </html>

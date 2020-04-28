@@ -2,14 +2,13 @@
 const puppeteer = require("puppeteer");
 const select = require ('puppeteer-select');
 const mongoose  = require('mongoose');
-var path = require('path');
-
+ var path = require('path');
 //express and body parser
 let express = require('express');
 let app = express();
 let bodyParser = require("body-parser");
 app.set('view engine', 'ejs')
-app.set('views', './views');
+// app.set('views', './views');
 
 //requite the configuration variables from the .env file.
 app.use(express.static(__dirname + "/public", {maxAge: 3456700000})); 
@@ -153,7 +152,7 @@ async function checkIfHashtagExists(hashtag,res){
         }
     })
 
-   
+
 
 
 }
@@ -186,8 +185,8 @@ async function mongoEverything(){
         });
      
     app.post('/', function(req, res){
-        console.log(req.body.hashtag);
-        console.log(req.body);
+        console.log('Post a hashtag: ' + JSON.stringify(req.body));
+        // console.log(req.body);
         checkIfHashtagExists(req.body.hashtag, res);
 
     });
@@ -213,7 +212,7 @@ function sleep(ms) {
 //main
 
 //server
-app.listen(8000, function () {
+app.listen(8080, function () {
     console.log("Node server running");
 });
 
