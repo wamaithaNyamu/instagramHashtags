@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,10 +35,10 @@
     <div class="wrapperEverything">
 
         
-<% hashtagData.forEach(function(instagramhashtags){%>
     <div class="innerEverything">
-        <span class="theHashtag">#<%= instagramhashtags.hashtag %>    </span>
-        <span class="followers"> Followers  <%= instagramhashtags.followers %></br>
+        <span class="theHashtag">#<%= data.hashtag%>    </span>
+        <span class="followers"> Followers <%= data.followers%>
+        </br>
         </span>
     </br>
 
@@ -47,7 +48,8 @@
             <fieldset >
                 <legend>Click to copy to clipboard</legend>
               <div class="relatedHashtags" data-clipboard-target="#copyText" id="copyText">
-                <%= instagramhashtags.relatedHashtags%></br>
+                <%= data.relatedHashtags%>
+            </br>
               </div> 
             </fieldset>
        
@@ -59,7 +61,6 @@
     
     
 
-    <%})%>
 </br>
 </div>
 </div>

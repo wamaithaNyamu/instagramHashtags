@@ -47,19 +47,27 @@ exports.findAll = (req,res) =>{
 
 //retrieve on hashtag
 exports.findOne = (req,res)=>{
-    Hashtags.findOne({hashtag: req.params.hashtag}).then(
+    Hashtags.findOne({hashtag: req.params.hashtag}).
+     
+    then(
         oneHashtag => {
             if(!oneHashtag){
                 return res.status(404).send({
                     message : "Apologies, we do'nt have this hashtag yet. Check in later. We are working on it ASAP!"
                 })
             }
-            // res.send(oneHashtag);
-            res.render('index.ejs', {
-                user: req.user,
-                oneSearch : oneHashtag
+            // data = {
+            //     hashtag : oneHashtag.hashtag,
+            //     followers: oneHashtag.followers,  
+            //    relatedHashtags:oneHashtag.relatedHashtags,
+            // }
+          //  res.send(oneHashtag);
+            res.render('result.ejs', {
+                  user: req.user,
+                  data : oneHashtag
+        
             });
-
+            console.log("this is onehashtag", oneHashtag.hashtag);
         }
     ).catch(err=> {
         if(err.kind === 'ObjectId'){
