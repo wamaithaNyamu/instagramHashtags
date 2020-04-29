@@ -4,7 +4,7 @@ function goTo(){
 
   //get a tag
   let a = document.getElementById("submit")
-  let localhost = "igbotwams.herokuapp.com/";
+  let localhost = "https://igbotwams.herokuapp.com/";
   let url = localhost + input
   console.log(url)
   a.href = url
