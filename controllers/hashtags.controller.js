@@ -1,4 +1,5 @@
 const Hashtags = require('../models/hashtag.model.js');
+const PUP = require('../models/pup.model.js');
 
 //create new hashtag and save it - to be puppeteered
 // exports.create = (req,res) => {
@@ -53,7 +54,17 @@ exports.findOne = (req,res)=>{
     then(
         oneHashtag => {
             if(!oneHashtag){
-                res.render('noresult.ejs');
+                
+        //new hashtag create
+    const hashtag = new PUP({
+        hashtag: req.params.hashtag,
+ 
+    });
+
+    //save hashtag in db
+    hashtag.save();
+    res.render('noresult.ejs');
+
                
             }
           else{

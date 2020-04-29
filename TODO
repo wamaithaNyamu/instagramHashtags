@@ -1,36 +1,3 @@
-//BACKEND TODOS:
-show user results 
-add button to queries they want to use
-copy all selected hashtags
-allow maximum of thirty hashtags
-launch puppeteer browser
-get all links on first url
-store in array
-only add # if not in array
-launch threads for the next gen
-repeat until we no longer have any more #
-add hashtags to db
-cron job to update hashtags daily
-serve clients from the db instead
-use ajax to serve results
-if hashtag not in db, launch puppeer and add to db then add to updating hashtags daily
+store user query if the query is not in our db
+puppeteer has diff db
 
-//FRONT END TODOS
-//order according to number of people using the hashtag
-//copy hashtags they want
-//max 30 hashtags
-//copy to clipboard
-only one hashtag at a time
-remove hash #
-
-
-
-
-NOTES:
--emulate real user
--launch ig once?
-
--no refreshes
---how to scrape a site that uses ajax
--this is not easy!
--AJAX IS A NIGHTMARE SERIOUSLY!
