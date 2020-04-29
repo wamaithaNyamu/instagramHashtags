@@ -1,11 +1,11 @@
 const puppeteer = require("puppeteer");
 const select = require ('puppeteer-select');
-app.use(express.static(__dirname + "/public", {maxAge: 3456700000})); 
-if (app.settings.env === 'development') process.env.NODE_ENV = 'development';
+const Hashtags = require('../../models/pup.model');
+
 require("dotenv").config();
 let LUMUSERNAME = process.env.LUMUSERNAME;
 let LUMPASSWORD= process.env.LUMPASSWORD;
-
+let MONGOURI = process.env.MONGOURI;
 
 //--------------------------------------------------------------------------------
 //get browser
@@ -53,7 +53,7 @@ try{
     await searchBarSelector.click();
 
     //delay
-    await sleep(10000);   
+    // await sleep(10000);   
 
     //type hashtag
     await page.$eval('.XTCLo', el => el.value = '#'+x);
@@ -65,3 +65,25 @@ try{
 }
 }
 
+const mongoose = require('mongoose');
+
+//----------------------------------------------------------------------------------------------
+//creates a connection to Mongo db
+async function connectMongo(){
+ mongoose.connect(MONGOURI,{
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    });
+   Hashtags.findOne().sort({$natural: -1}).limit(1).exec(function(err, res){
+        if(err){
+            console.log(err);
+        }
+        else{
+            console.log(res.hashtag);
+            goToInstagram(res.hashtag)
+        }
+    });
+}
+
+
+connectMongo();

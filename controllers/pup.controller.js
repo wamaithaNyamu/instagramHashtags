@@ -43,38 +43,7 @@ exports.create = (req,res) => {
 //     });
 // };
 
-
-// // retrieve one hashtag
-// exports.findOne = (req,res)=>{
-//     let search = req.params.hashtag;
-//     Hashtags.findOne({hashtag: search}).
-     
-//     then(
-//         oneHashtag => {
-//             if(!oneHashtag){
-//                 res.render('noresult.ejs');
-               
-//             }
-//           else{
-//             res.render('result.ejs', {
-//                 user: req.user,
-//                 data : oneHashtag
-      
-//           });
-//           console.log("this is onehashtag", oneHashtag.hashtag);
-//           }
-        
-//         }
-//     ).catch(err=> {
-//         if(err.kind === 'ObjectId'){
-//             res.render('404.ejs');
-
-//         }
-//         return res.status(500).send({
-//             message : "retrieval errors"
-//         })
-//     })
-// };
+// retrieve one hashtag
 
 
 // //update hashtag 
