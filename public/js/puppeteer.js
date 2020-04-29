@@ -6,7 +6,13 @@ require("dotenv").config();
 let LUMUSERNAME = process.env.LUMUSERNAME;
 let LUMPASSWORD= process.env.LUMPASSWORD;
 let MONGOURI = process.env.MONGOURI;
-
+//----------------------------------------------------------------------------
+//sleep
+function sleep(ms) {
+    return new Promise((resolve) => {
+      setTimeout(resolve, ms);
+    });
+  } 
 //--------------------------------------------------------------------------------
 //get browser
 
@@ -53,10 +59,13 @@ try{
     await searchBarSelector.click();
 
     //delay
-    // await sleep(10000);   
+    await sleep(10000);   
 
     //type hashtag
-    await page.$eval('.XTCLo', el => el.value = '#'+x);
+    //await page.$eval('.XTCLo', el => el.value = '#'+x);
+    console.log("this is x before type", x);
+    await page.type('.XTCLo', x);
+    console.log("this is x after type", x);
 
 
 }catch (e){
