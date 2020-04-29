@@ -3,7 +3,7 @@ module.exports = (app) =>{
 
 
     //new hashtag
-    app.post('/hashtags', hashtags.create);
+    // app.post('/hashtags', hashtags.create);
 
 
     //get all hashtags
@@ -11,21 +11,11 @@ module.exports = (app) =>{
 
     //get on hashtag
     app.get('/:hashtag', hashtags.findOne);
-    // app.get('/hashtags', hashtags.search);
 
-    //update a hashtag
-    app.put('/hashtags/:hashtagId', hashtags.update);
+    // //update a hashtag
+    // app.put('/hashtags/:hashtagId', hashtags.update);
 
-    //delete a hashtag
-    app.delete('/hashtags/:hashtagId', hashtags.delete);
+    // //delete a hashtag
+    // app.delete('/hashtags/:hashtagId', hashtags.delete);
     
 }
-// const express = require('express');
-// const { hash } =require('../controllers/hashtags.controller.js');
-// const API = '/hashtags'
-
-// const router = express.Router();
-
-// router.get(`${API}/search`, hash);
-
-// module.exports = router;
