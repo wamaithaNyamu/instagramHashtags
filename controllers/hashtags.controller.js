@@ -45,23 +45,18 @@ exports.findAll = (req,res) =>{
 };
 
 
-//retrieve on hashtag
+// retrieve one hashtag
 exports.findOne = (req,res)=>{
-    Hashtags.findOne({hashtag: req.params.hashtag}).
+    let search = req.params.hashtag;
+    Hashtags.findOne({hashtag: search}).
      
     then(
         oneHashtag => {
             if(!oneHashtag){
-                return res.status(404).send({
-                    message : "Apologies, we do'nt have this hashtag yet. Check in later. We are working on it ASAP!"
-                })
+                res.render('404.ejs');
+               
             }
-            // data = {
-            //     hashtag : oneHashtag.hashtag,
-            //     followers: oneHashtag.followers,  
-            //    relatedHashtags:oneHashtag.relatedHashtags,
-            // }
-          //  res.send(oneHashtag);
+          
             res.render('result.ejs', {
                   user: req.user,
                   data : oneHashtag
@@ -81,6 +76,41 @@ exports.findOne = (req,res)=>{
     })
 };
 
+// exports.search = async (req,res) => {
+//     try{
+//         const {search_value} = req.query;
+
+//         const queryObj = {};
+
+//         if(search_value !== ''){
+//             queryObj[search_value] = search_value;
+//         }
+
+//         const hashtag = await Hashtags.find(queryObj);
+
+//         if(!hashtag){
+//             console.log("no such thing")
+//             return res.status(404).json({
+//                 status: 'failure',
+//                 message: `The hashtag ${search_value} is yet to be invented`
+//             })
+//         }
+
+//         res.status(200).json({
+//             status: 'success',
+//             data : hashtag
+//         });
+
+    
+
+
+//     }catch (e){
+//         res.status(500).json({
+//             status: 'failure',
+//             error: error.message
+//           });
+//     }
+// } 
 
 //update hashtag 
 exports.update = (req,res)=>{

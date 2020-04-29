@@ -1,4 +1,4 @@
-form {
+#form {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,20 +8,24 @@ form {
   padding-top: 10%;
   padding-bottom: 0%;
 }
-form input {
+#form input {
   font-size: 30px;
+  padding: 20px;
+  margin: 10px;
+
+  width: 450px;
   border: 1px solid #eaeaea;
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
 }
-form #hashtag {
+#form #hashtag {
   height: 80px;
   width: 600px;
 }
-form #submit {
+#form #submit {
   border-color: none;
   background-color: orange;
-  padding: 10px;
+  padding: 7px;
   margin: 2px;
   width: 200px;
   cursor: pointer;
@@ -31,8 +35,14 @@ form #submit {
   border: 1px solid #eaeaea;
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
 }
-
+a{
+  text-decoration: none;
+}
 #results {
   top: 30vh;
   display: flex;
