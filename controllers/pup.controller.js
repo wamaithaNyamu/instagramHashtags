@@ -1,30 +1,30 @@
 const Hashtags = require('../models/pup.model.js');
 
 // create new hashtag and save it - to be puppeteered
-exports.create = (req,res) => {
-    //validate request
-    if(!req.body.hashtag){
-        return res.status(400).send({
-            message: "submit something"
-        });
-    }
+// exports.create = (req,res) => {
+//     //validate request
+//     if(!req.body.hashtag){
+//         return res.status(400).send({
+//             message: "submit something"
+//         });
+//     }
 
-        //new hashtag create
-    const hashtag = new Hashtags({
-        hashtag: req.body.hashtag,
+//         //new hashtag create
+//     const hashtag = new Hashtags({
+//         hashtag: req.body.hashtag,
         
-    });
+//     });
 
-    //save hashtag in db
-    hashtag.save().then(data =>{
-        res.send(data);
-    }).catch(err =>{
-        res.status(500).send({
-            message: err.message || "Something went horribly wrong!"
-        });
-    });
+//     //save hashtag in db
+//     hashtag.save().then(data =>{
+//         res.send(data);
+//     }).catch(err =>{
+//         res.status(500).send({
+//             message: err.message || "Something went horribly wrong!"
+//         });
+//     });
 
-};
+// };
 
 
 //retrieves everythingggg

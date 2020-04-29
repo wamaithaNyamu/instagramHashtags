@@ -54,15 +54,23 @@ exports.findOne = (req,res)=>{
     then(
         oneHashtag => {
             if(!oneHashtag){
-                
-        //new hashtag create
-    const hashtag = new PUP({
-        hashtag: req.params.hashtag,
- 
-    });
+        PUP.findOne({hashtag: search}).then(
+            pup =>{
+                if(!pup){
+                                        //new hashtag create
+                    const hashtag = new PUP({
+                        hashtag: req.params.hashtag,
 
-    //save hashtag in db
-    hashtag.save();
+                });
+
+                //save hashtag in db
+                hashtag.save();
+                }else {
+                    return
+                }
+            }
+        )  
+   
     res.render('noresult.ejs');
 
                
